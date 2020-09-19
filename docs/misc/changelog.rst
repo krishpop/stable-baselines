@@ -65,6 +65,7 @@ Bug Fixes:
 - Fixed a bug in CloudPickleWrapper's (used by VecEnvs) ``__setstate___`` where loading was incorrectly using ``pickle.loads`` (@shwang).
 - Fixed a bug in ``SAC`` and ``TD3`` where the log timesteps was not correct(@YangRui2015)
 - Fixed a bug where the environment was reset twice when using ``evaluate_policy``
+- Fixed a bug in ``SAC`` where log step used by ``writer.add_summary`` is reset to 0 on every call to ``SAC.learn``
 
 
 Deprecations:
