@@ -313,8 +313,7 @@ class SAC(OffPolicyRLModel):
 
                 self.summary = tf.summary.merge_all()
 
-    def _train_step(self, step, writer, learning_rate):
-        del step
+    def _train_step(self, writer, learning_rate):
         # Sample a batch from the replay buffer
         batch = self.replay_buffer.sample(self.batch_size, env=self._vec_normalize_env)
         batch_obs, batch_actions, batch_rewards, batch_next_obs, batch_dones = batch
@@ -461,7 +460,7 @@ class SAC(OffPolicyRLModel):
                         frac = 1.0 - step / total_timesteps
                         current_lr = self.learning_rate(frac)
                         # Update policy and critics (q functions)
-                        mb_infos_vals.append(self._train_step(step, writer, current_lr))
+                        mb_infos_vals.append(self._train_step(writer, current_lr))
                         # Update target network
                         if (step + grad_step) % self.target_update_interval == 0:
                             # Update target network
